@@ -65,6 +65,17 @@ class _RegisterScreenState extends State<LoginScreen> {
                         Lottie.asset("assets/images/Login.json", height: 250.h),
 
                         SizedBox(height: 20.h),
+                        CousttomTextFeld(
+                          controller: nameController,
+                          hintText: "Enter your name".tr(),
+                          isPassword: false,
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return "Name is required";
+                            }
+                            return null;
+                          },
+                        ),
 
                         SizedBox(height: 25.h),
                         CousttomTextFeld(
@@ -166,6 +177,17 @@ class _RegisterScreenState extends State<LoginScreen> {
                           },
                         ),
                         SizedBox(height: 25.h),
+                        CousttomTextFeld(
+                          controller: cutyController,
+                          hintText: "Enter your city".tr(),
+                          isPassword: false,
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return "City is required";
+                            }
+                            return null;
+                          },
+                        ),
 
                         SizedBox(height: 25.h),
 
@@ -174,11 +196,12 @@ class _RegisterScreenState extends State<LoginScreen> {
                             if (state is LoginLoading) {
                               showLoadingDialog(context);
                             } else if (state is LoginSuccess) {
-                              Navigator.pushReplacement(
+                              Navigator.pushAndRemoveUntil(
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) => LandingScreen(),
                                 ),
+                                (route) => route.isFirst,
                               );
                             } else if (state is LoginError) {
                               ScaffoldMessenger.of(context).showSnackBar(

@@ -62,9 +62,9 @@ class _CousttomTextFeldState extends State<CousttomTextFeld> {
             fontSize: 17.sp,
             color: Colors.black,
           ),
-          floatingLabelBehavior: FloatingLabelBehavior.auto, // السلوك الطبيعي
+          floatingLabelBehavior: FloatingLabelBehavior.never, // السلوك الطبيعي
           floatingLabelStyle: TextStyle(
-            color: Colors.blueAccent, // لون النص لما يطفو فوق
+            color: Colors.black, // لون النص لما يطفو فوق
             fontSize: 20.sp, // حجم النص لما يطفو فوق
             fontWeight: FontWeight.bold,
           ),

@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -6,11 +7,21 @@ import 'package:lottie/lottie.dart';
 import '../../core/theme/app_text_style.dart';
 import '../../core/widgets/animate_gradient.dart';
 import '../auth/preasntation/register_screen.dart';
+import '../landing/presentation/landing_screen.dart';
 import '../welcome/presentation/welcome_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
-
+  Future<bool> checkUserExists() async {
+    try {
+      final user = FirebaseAuth.instance.currentUser;
+      if (user == null) return false;
+      await user.reload(); // يحدث بيانات المستخدم من الخادم
+      return FirebaseAuth.instance.currentUser != null;
+    } catch (e) {
+      return false;
+    }
+  }
   @override
   State<SplashScreen> createState() => _SplashScreenState();
 }
@@ -20,11 +31,31 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
 
-    Future.delayed(Duration(seconds: 5), () {
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => WelcomeScreen()),
-      );
+    Future.delayed(Duration(seconds: 5), () async {
+      final user = FirebaseAuth.instance.currentUser;
+
+      bool exists = false;
+      if(user != null){
+        try {
+          await user.reload(); // يحدث بيانات المستخدم من الخادم
+          exists = FirebaseAuth.instance.currentUser != null;
+        } catch (e) {
+          exists = false;
+        }
+      }
+
+       if(exists){
+         Navigator.pushReplacement(
+           context,
+           MaterialPageRoute(builder: (context) => LandingScreen()),
+         );
+       }else {
+         // المستخدم جديد أو لم يسجل دخول
+         Navigator.pushReplacement(
+           context,
+           MaterialPageRoute(builder: (context) => WelcomeScreen()),
+         );
+       }
     });
   }
 

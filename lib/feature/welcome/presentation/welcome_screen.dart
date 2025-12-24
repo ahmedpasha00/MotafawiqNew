@@ -43,7 +43,10 @@ class WelcomeScreen extends StatelessWidget {
                       onTap: () {
                         Navigator.push(context, MaterialPageRoute(builder: (
                             context) =>
-                            AuthScreen()));
+                            BlocProvider(
+                              create: (context) => LoginCubit(),
+                              child: AuthScreen(),
+                            )));
                       },
                     ),
 

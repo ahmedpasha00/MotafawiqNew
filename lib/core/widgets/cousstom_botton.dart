@@ -26,7 +26,7 @@ class _CousstomBottonState extends State<CousstomBotton> {
 
 
           borderRadius: BorderRadius.circular(12.r),
-          color: Colors.brown,
+          color:  Color(0xFF0B1D51),
         ),
         child: Center(
           child: Text(widget.titell,
