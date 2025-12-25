@@ -10,11 +10,14 @@ class LoginCubit extends Cubit<LoginState> {
   Login({
     required String emailAddress,
     required String password,
+    //هانشيل ال كونفيرم باسوردد
     required String confirmPassword,
     required String name,
     required String phone,
     required String guardianPhone,
     required String city,
+    required String WhichGrade,
+    required String PublicOrAlAzhar,
   }) async {
     if (emailAddress.isEmpty || password.isEmpty) {
       emit(LoginError(message: "Email and password cannot be empty"));
@@ -32,6 +35,8 @@ class LoginCubit extends Cubit<LoginState> {
         phone: phone,
         guardianPhone: guardianPhone,
         cuty: city,
+        WhichGrade: WhichGrade,
+        PublicOrAlAzhar: PublicOrAlAzhar,
       );
       emit(LoginSuccess());
     } on FirebaseAuthException catch (e) {
@@ -41,45 +46,4 @@ class LoginCubit extends Cubit<LoginState> {
     }
   }
 
-  LoginOnly({required String emailAddress, required String password}) async {
-    emit(LoginLoading());
-
-    try {
-      await LoginRepo.loginWithEmailAndPasswordOnly(
-        emailAddress: emailAddress,
-        password: password,
-      );
-      emit(LoginSuccess());
-    } on FirebaseAuthException catch (e) {
-      String message;
-
-      switch (e.code) {
-        case 'user-not-found':
-          message = 'الإيميل غير مسجل';
-          break;
-
-        case 'wrong-password':
-          message = 'كلمة المرور غير صحيحة';
-          break;
-
-        case 'invalid-email':
-          message = 'الإيميل غير صالح';
-          break;
-
-        case 'user-disabled':
-          message = 'هذا الحساب موقوف';
-          break;
-
-        case 'too-many-requests':
-          message = 'محاولات كثيرة، حاول لاحقًا';
-          break;
-
-        default:
-          message = 'حدث خطأ، حاول مرة أخرى';
-      }
-      emit(LoginError(message: message)); // ✅ هنا مهم
-    } catch (e) {
-      emit(LoginError(message: 'حدث خطأ غير متوقع'));
-    }
-  }
 }

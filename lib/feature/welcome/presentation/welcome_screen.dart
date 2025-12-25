@@ -1,4 +1,3 @@
-import 'package:al_motafawiq/feature/auth/cubit/auth_cubit.dart';
 import 'package:al_motafawiq/feature/auth/cubit_login/login_cubit.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';

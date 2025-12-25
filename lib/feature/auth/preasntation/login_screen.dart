@@ -28,6 +28,8 @@ class _RegisterScreenState extends State<LoginScreen> {
   final TextEditingController guardianPhoneController = TextEditingController();
   final TextEditingController cutyController = TextEditingController();
   final TextEditingController nameController = TextEditingController();
+  final TextEditingController PublicOrAlAzharController = TextEditingController();
+  final TextEditingController WhichgradeController = TextEditingController();
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
@@ -41,6 +43,8 @@ class _RegisterScreenState extends State<LoginScreen> {
     cutyController.dispose();
     nameController.dispose();
     guardianPhoneController.dispose();
+    PublicOrAlAzharController.dispose();
+    WhichgradeController.dispose();
 
     super.dispose();
   }
@@ -177,6 +181,32 @@ class _RegisterScreenState extends State<LoginScreen> {
                           },
                         ),
                         SizedBox(height: 25.h),
+
+                        CousttomTextFeld(
+                          controller: WhichgradeController,
+                          hintText: "Enter your Which grade".tr(),
+                          isPassword: false,
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return "Which grade is required";
+                            }
+                            return null;
+                          },
+                        ),
+                        SizedBox(height: 25.h),
+
+                        CousttomTextFeld(
+                          controller: PublicOrAlAzharController,
+                          hintText: "Enter your Public or Al-Azhar".tr(),
+                          isPassword: false,
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return "Public or Al-Azhar is required";
+                            }
+                            return null;
+                          },
+                        ),
+                        SizedBox(height: 25.h),
                         CousttomTextFeld(
                           controller: cutyController,
                           hintText: "Enter your city".tr(),
@@ -226,15 +256,17 @@ class _RegisterScreenState extends State<LoginScreen> {
                                     .text
                                     .trim();
                                 final city = cutyController.text.trim();
+                                final PublicOrAlAzhar = PublicOrAlAzharController.text.trim();
+                                final Whichgrade =  WhichgradeController.text.trim();
 
                                 // بعدين نطبع البيانات
-                                print('Email: $email');
-                                print('Password: $password');
-                                print('Confirm Password: $confirmPassword');
-                                print('Name: $name');
-                                print('Phone: $phone');
-                                print('Guardian Phone: $guardianPhone');
-                                print('City: $city');
+                                // print('Email: $email');
+                                // print('Password: $password');
+                                // print('Confirm Password: $confirmPassword');
+                                // print('Name: $name');
+                                // print('Phone: $phone');
+                                // print('Guardian Phone: $guardianPhone');
+                                // print('City: $city');
                                 context.read<LoginCubit>().Login(
                                   emailAddress: emailController.text.trim(),
                                   password: passwordController.text.trim(),
@@ -246,6 +278,8 @@ class _RegisterScreenState extends State<LoginScreen> {
                                   guardianPhone: guardianPhoneController.text
                                       .trim(),
                                   city: cutyController.text.trim(),
+                                  WhichGrade: WhichgradeController.text.trim(),
+                                  PublicOrAlAzhar: PublicOrAlAzharController.text.trim(),
                                 );
 
                                 if (_formKey.currentState!.validate()) {

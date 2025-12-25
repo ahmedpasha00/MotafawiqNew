@@ -12,6 +12,8 @@ class LoginRepo {
     required String guardianPhone,
     required String phone,
     required String name,
+    required String PublicOrAlAzhar,
+    required String WhichGrade,
   }) async {
     if (password != Confirmpassword) {
       throw FirebaseAuthException(
@@ -33,7 +35,10 @@ class LoginRepo {
         'phone': phone,
         'guardianPhone': guardianPhone,
         'city': cuty,
+        //دي هاشيلها لما التطبيق يشتغل
         'Confirmpassword': Confirmpassword,
+        'WhichGrade': WhichGrade,
+        'PublicOrAlAzhar': PublicOrAlAzhar,
         'createdAt': FieldValue.serverTimestamp(),
       });
       return credential;
@@ -45,16 +50,5 @@ class LoginRepo {
     }
   }
 
-
-  /// 🔹 Login (الجديد)
-  static Future loginWithEmailAndPasswordOnly({
-    required String emailAddress,
-    required String password,
-  }) async {
-    await FirebaseAuth.instance.signInWithEmailAndPassword(
-      email: emailAddress,
-      password: password,
-    );
   }
 
-}
