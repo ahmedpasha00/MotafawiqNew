@@ -11,6 +11,13 @@ final class RegisterSuccess extends RegisterState {
 
 }
 final class RegisterLoading extends RegisterState {}
+final class RegisterSuccessAdmin extends RegisterState {
+  final User user;
+
+  RegisterSuccessAdmin(this.user);
+
+}
+
 final class RegisterError extends RegisterState {
   final String message;
 

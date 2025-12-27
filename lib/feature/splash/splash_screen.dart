@@ -1,3 +1,5 @@
+import 'package:al_motafawiq/feature/feature_admin/dashboard_admin/presentation/dashboard_admin_screen.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -28,36 +30,54 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
   @override
+  @override
   void initState() {
     super.initState();
 
-    Future.delayed(Duration(seconds: 5), () async {
+    Future.delayed(Duration(seconds: 3), () async { // قللت الوقت من 5 ثواني لـ 3
       final user = FirebaseAuth.instance.currentUser;
 
-      bool exists = false;
-      if(user != null){
+      if (user != null) {
         try {
           await user.reload(); // يحدث بيانات المستخدم من الخادم
-          exists = FirebaseAuth.instance.currentUser != null;
+          final currentUser = FirebaseAuth.instance.currentUser;
+
+          if (currentUser != null) {
+            // جلب بيانات الدور من Firestore
+            final doc = await FirebaseFirestore.instance
+                .collection('users')
+                .doc(currentUser.uid)
+                .get();
+
+            final role = doc['role'] ?? 'user';
+            print('Role: $role'); // للتأكد في اللوج
+
+            if (role == 'admin') {
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (_) => DashboardAdminScreen()), // صفحة الأدمين
+              );
+            } else {
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (_) => LandingScreen()), // صفحة المستخدم العادي
+              );
+            }
+            return;
+          }
         } catch (e) {
-          exists = false;
+          print('Error checking user: $e');
         }
       }
 
-       if(exists){
-         Navigator.pushReplacement(
-           context,
-           MaterialPageRoute(builder: (context) => LandingScreen()),
-         );
-       }else {
-         // المستخدم جديد أو لم يسجل دخول
-         Navigator.pushReplacement(
-           context,
-           MaterialPageRoute(builder: (context) => WelcomeScreen()),
-         );
-       }
+      // المستخدم جديد أو لم يسجل دخول
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (_) => WelcomeScreen()),
+      );
     });
   }
+
 
   @override
   Widget build(BuildContext context) {

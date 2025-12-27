@@ -2,11 +2,14 @@
 
 
 
+import 'package:al_motafawiq/feature/chat_ai/preasentation/chat_ai_screen.dart';
 import 'package:al_motafawiq/feature/dashboard/preasntation/cubit/dashboard_cubit.dart';
 import 'package:al_motafawiq/feature/dashboard/preasntation/data/repo/dashboard_repo.dart';
 import 'package:al_motafawiq/feature/enrolled_courses/preasntation/enrolled_courses_screen.dart';
+import 'package:al_motafawiq/feature/live_stream/presentation/live_stream_screen.dart';
 import 'package:al_motafawiq/feature/my_courses/preasntation/my_courses_screen.dart';
 import 'package:al_motafawiq/feature/sittengs/presentation/setting_screen.dart';
+import 'package:al_motafawiq/feature/teacher_student_chat/presentation/teacher_student_chat_screen.dart';
 import 'package:al_motafawiq/feature/top10/preasntation/top10_screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -30,8 +33,12 @@ List<ThinkingAction> thinkingAction =[
   ThinkingAction(titter: "كورساتي", icon: Icons.video_camera_back, page: MyCoursesScreen()),
   ThinkingAction(titter: "الكورسات الغير مشترك بها", icon: Icons.insights, page: EnrolledCoursesScreen()),
   ThinkingAction(titter: "أعلى 10", icon: Icons.star, page: Top10Screen()), // أضف أعلى 10
-  ThinkingAction(titter: "تفاصيل المشاهدة", icon: Icons.remove_red_eye, page: ViewDetailsScreen()), // تفاصيل المشاهدة
-  ThinkingAction(titter: "تسجيل الخروج", icon: Icons.logout, page: LogoutScreen()), // كبير في الآخر
-  ThinkingAction(titter: "الاعدادات ", icon: Icons.logout, page: SettingScreen()), // كبير في الآخر
+  ThinkingAction(titter: "تفاصيل المشاهدة", icon: Icons.remove_red_eye, page: ViewDetailsScreen()),
+  ThinkingAction(titter: "تسجيل الخروج", icon: Icons.logout, page: LogoutScreen()),
+  ThinkingAction(titter: "الاعدادات ", icon: Icons.logout, page: SettingScreen()),
+
+  ThinkingAction(titter: "دردشه بين المدرس والطالب  ", icon: Icons.wechat_outlined, page: TeacherStudentChatScreen()),
+  ThinkingAction(titter: "شات ذكاء اصطناعي ", icon: Icons.chat_outlined, page: ChatScreen()),
+  ThinkingAction(titter: "بث مباشر ", icon: Icons.live_tv_rounded, page: LiveStreamScreen()),
 
 ];

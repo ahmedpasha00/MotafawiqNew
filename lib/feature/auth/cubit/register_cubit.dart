@@ -17,7 +17,14 @@ class RegisterCubit extends Cubit<RegisterState> {
 
     try {
       final user = await repo.login(email, password);
-      emit(RegisterSuccess(user));
+      final doc = await repo.firestore.collection('users').doc(user.uid).get();
+      final role = doc['role'] ?? 'user';
+
+      if (role == 'admin') {
+        emit(RegisterSuccessAdmin(user));
+      } else {
+        emit(RegisterSuccess(user));
+      }
     } catch (e) {
       emit(RegisterError(e.toString()));
     }

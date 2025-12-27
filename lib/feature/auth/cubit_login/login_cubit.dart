@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:meta/meta.dart';
 import '../data_login/repo/login_repo.dart';
@@ -27,7 +28,7 @@ class LoginCubit extends Cubit<LoginState> {
     emit(LoginLoading());
 
     try {
-      await LoginRepo.loginWithEmailAndPassword(
+      final credential = await LoginRepo.loginWithEmailAndPassword(
         emailAddress: emailAddress,
         password: password,
         Confirmpassword: confirmPassword,
@@ -38,8 +39,21 @@ class LoginCubit extends Cubit<LoginState> {
         WhichGrade: WhichGrade,
         PublicOrAlAzhar: PublicOrAlAzhar,
       );
-      emit(LoginSuccess());
-    } on FirebaseAuthException catch (e) {
+
+
+     final uid = credential.user!.uid;
+     final userDoc = await FirebaseFirestore.instance.collection('users').doc(uid).get();
+     final role = userDoc['role']??'user';
+
+
+      print('Role: $role');
+
+
+      if (role == 'admin') {
+        emit(LoginSuccessAdmin());
+      } else {
+        emit(LoginSuccessUser());
+      }    } on FirebaseAuthException catch (e) {
       emit(LoginError(message: e.message ?? 'حدث خطأ في تسجيل الدخول'));
     } catch (e) {
       emit(LoginError(message: 'حدث خطأ غير متوقع'));

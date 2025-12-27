@@ -15,11 +15,19 @@ class AuthRepo {
     );
 
     // Optional: تحقق لو المستخدم موجود في الـ Firestore
-    final doc = await firestore.collection('users').doc(userCredential.user!.uid).get();
+    final doc = await firestore.collection('users').doc(
+        userCredential.user!.uid).get();
     if (!doc.exists) {
       throw Exception("هذا المستخدم غير موجود في قاعدة البيانات");
     }
+    final role = doc['role'] ?? 'user';
+    print('Role: $role'); // للتأكد في اللوج
 
-    return userCredential.user!; // ✅ صح
+    if (role == 'admin') {
+      // لو أدمين، نرجع قيمة خاصة أو يمكن إضافة فئة جديدة
+      return userCredential.user!; // أو نضيف خصائص خاصة للأدمين
+    } else {
+      return userCredential.user!;
+    }
   }
 }

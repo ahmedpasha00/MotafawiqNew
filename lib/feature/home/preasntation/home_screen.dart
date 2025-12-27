@@ -5,7 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lottie/lottie.dart';
 
 import '../../../core/widgets/coustom_draggable_chat_button.dart';
-import '../../chat_ai/preasentation/chat_screen.dart';
+import '../../chat_ai/preasentation/chat_ai_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});

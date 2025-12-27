@@ -9,6 +9,7 @@ class ContainerDashboard extends StatelessWidget {
   final Widget? child;
   final EdgeInsetsGeometry? padding;
 
+
   const ContainerDashboard({
     Key? key,
     this.minHeight = 400,          // القيمة الافتراضية
@@ -22,19 +23,23 @@ class ContainerDashboard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+
       width: double.infinity,
       constraints: BoxConstraints(
+
         minHeight: minHeight.h,
         maxHeight: maxHeight.h,
       ),
       padding: padding ?? EdgeInsets.all(16.r),
       decoration: BoxDecoration(
+
         borderRadius: borderRadius ?? BorderRadius.circular(16.r),
         gradient: LinearGradient(
           colors: gradientColors ?? [Colors.brown.shade800, Colors.blue.shade400],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
+
         boxShadow: [
           BoxShadow(
             color: Colors.black.withOpacity(0.25),

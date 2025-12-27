@@ -1,4 +1,5 @@
 import 'package:al_motafawiq/feature/auth/cubit_login/login_cubit.dart';
+import 'package:al_motafawiq/feature/feature_admin/dashboard_admin/presentation/dashboard_admin_screen.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -28,7 +29,8 @@ class _RegisterScreenState extends State<LoginScreen> {
   final TextEditingController guardianPhoneController = TextEditingController();
   final TextEditingController cutyController = TextEditingController();
   final TextEditingController nameController = TextEditingController();
-  final TextEditingController PublicOrAlAzharController = TextEditingController();
+  final TextEditingController PublicOrAlAzharController =
+      TextEditingController();
   final TextEditingController WhichgradeController = TextEditingController();
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
@@ -225,7 +227,15 @@ class _RegisterScreenState extends State<LoginScreen> {
                           listener: (context, state) {
                             if (state is LoginLoading) {
                               showLoadingDialog(context);
-                            } else if (state is LoginSuccess) {
+                            } else if (state is LoginSuccessAdmin) {
+                              Navigator.pushAndRemoveUntil(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => DashboardAdminScreen(),
+                                ),
+                                (route) => false,
+                              );
+                            } else if (state is LoginSuccessUser) {
                               Navigator.pushAndRemoveUntil(
                                 context,
                                 MaterialPageRoute(
@@ -256,8 +266,10 @@ class _RegisterScreenState extends State<LoginScreen> {
                                     .text
                                     .trim();
                                 final city = cutyController.text.trim();
-                                final PublicOrAlAzhar = PublicOrAlAzharController.text.trim();
-                                final Whichgrade =  WhichgradeController.text.trim();
+                                final PublicOrAlAzhar =
+                                    PublicOrAlAzharController.text.trim();
+                                final Whichgrade = WhichgradeController.text
+                                    .trim();
 
                                 // بعدين نطبع البيانات
                                 // print('Email: $email');
@@ -279,7 +291,9 @@ class _RegisterScreenState extends State<LoginScreen> {
                                       .trim(),
                                   city: cutyController.text.trim(),
                                   WhichGrade: WhichgradeController.text.trim(),
-                                  PublicOrAlAzhar: PublicOrAlAzharController.text.trim(),
+                                  PublicOrAlAzhar: PublicOrAlAzharController
+                                      .text
+                                      .trim(),
                                 );
 
                                 if (_formKey.currentState!.validate()) {

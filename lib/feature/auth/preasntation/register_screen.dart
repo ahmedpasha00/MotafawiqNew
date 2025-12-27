@@ -1,3 +1,4 @@
+import 'package:al_motafawiq/feature/feature_admin/dashboard_admin/presentation/dashboard_admin_screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -44,7 +45,15 @@ class _AuthScreenState extends State<AuthScreen> {
         listener: (context, state) {
           if (state is RegisterLoading) {
             showLoadingDialog(context);
-          } else if (state is RegisterSuccess) {
+          }
+          else if (state is RegisterSuccessAdmin) {
+            if (Navigator.canPop(context)) Navigator.pop(context);
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (_) => DashboardAdminScreen()), // صفحة الأدمين
+            );
+          }
+          else if (state is RegisterSuccess) {
             if (Navigator.canPop(context)) Navigator.pop(context);
             Navigator.pushReplacement(
               context,

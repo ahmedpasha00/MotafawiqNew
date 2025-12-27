@@ -39,6 +39,7 @@ class LoginRepo {
         'Confirmpassword': Confirmpassword,
         'WhichGrade': WhichGrade,
         'PublicOrAlAzhar': PublicOrAlAzhar,
+        'role': 'user', // كل مستخدم جديد عادي هيكون 'user'
         'createdAt': FieldValue.serverTimestamp(),
       });
       return credential;
