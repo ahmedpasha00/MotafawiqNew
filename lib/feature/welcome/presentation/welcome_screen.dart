@@ -24,45 +24,57 @@ class WelcomeScreen extends StatelessWidget {
         children: [
           AnimateGradientu(child: Scaffold()),
 
-
           SafeArea(
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 16.0.w),
               child: SingleChildScrollView(
                 child: Column(
                   children: [
-                    SizedBox(height: 30.h,),
+                    SizedBox(height: 30.h),
 
                     Lottie.asset("assets/images/Login.json", height: 250.r),
-                    SizedBox(height: 20.h,),
+                    SizedBox(height: 20.h),
 
-                    Text("Welcome Back", style: AppTextStyle.Bold30Whit,),
-                    SizedBox(height: 180.h,),
-                    CousstomBotton(titell: 'Login'.tr(),
+                    Text(
+                      "Welcome Back".tr(), // ✅ تم إضافة الترجمة
+                      style: AppTextStyle.Bold30Whit,
+                    ),
+                    SizedBox(height: 180.h),
+
+                    CousstomBotton(
+                      titell: 'Login'.tr(), // ✅ ترجمة
                       onTap: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (
-                            context) =>
-                            BlocProvider(
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => BlocProvider(
                               create: (context) => LoginCubit(),
                               child: AuthScreen(),
-                            )));
+                            ),
+                          ),
+                        );
                       },
                     ),
 
-                    SizedBox(height: 25.h,),
-                    CousstomBotton(titell: 'Register'.tr(),
+                    SizedBox(height: 25.h),
+
+                    CousstomBotton(
+                      titell: 'Register'.tr(), // ✅ ترجمة
                       onTap: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (
-                            context) =>
-                            BlocProvider(
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => BlocProvider(
                               create: (context) => LoginCubit(),
                               child: LoginScreen(),
-                            )));
+                            ),
+                          ),
+                        );
                       },
                     ),
-                    SizedBox(height: 30.h,),
+                    SizedBox(height: 30.h),
 
-                    CoustomLanguage(),
+                    CoustomLanguage(), // زر تغيير اللغة
 
                   ],
                 ),
@@ -71,7 +83,6 @@ class WelcomeScreen extends StatelessWidget {
           ),
         ],
       ),
-
     );
   }
 }

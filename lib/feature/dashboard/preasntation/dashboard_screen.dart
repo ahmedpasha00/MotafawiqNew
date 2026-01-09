@@ -28,14 +28,14 @@ class DashboardScreen extends StatelessWidget {
                 child: Column(
                   children: [
                     Center(
-                      child: Text("Dashboard", style: AppTextStyle.Bold25Whit),
+                      child: Text("Dashboard".tr(), style: AppTextStyle.Bold25Whit),
                     ),
                     SizedBox(height: 20.h),
                     Container(
                       width: double.infinity,
                       constraints: BoxConstraints(
-                        minHeight: 400.h, // الهايت الابتدائي
-                        maxHeight: double.infinity, // يسمح له يزيد حسب البيانات
+                        minHeight: 400.h,
+                        maxHeight: double.infinity,
                       ),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(16.r),
@@ -45,13 +45,11 @@ class DashboardScreen extends StatelessWidget {
                           end: Alignment.bottomRight,
                         ),
                         boxShadow: [
-                          // Shadow غامق أسفل/يمين
                           BoxShadow(
                             color: Colors.black.withOpacity(0.4),
                             offset: Offset(4, 4),
                             blurRadius: 8,
                           ),
-                          // Shadow فاتح أعلى/يسار
                           BoxShadow(
                             color: Colors.white.withOpacity(0.1),
                             offset: Offset(-4, -4),
@@ -63,7 +61,6 @@ class DashboardScreen extends StatelessWidget {
                         padding: EdgeInsets.all(29.0.r),
                         child: BlocBuilder<DashboardCubit, DashboardState>(
                           builder: (context, state) {
-                            // 1️⃣ Loading
                             if (state is DashboardLoading) {
                               return Center(
                                 child: CircularProgressIndicator(
@@ -72,7 +69,6 @@ class DashboardScreen extends StatelessWidget {
                               );
                             }
 
-                            // 2️⃣ Success
                             if (state is DashboardSuccess) {
                               final student = state.student;
 
@@ -80,70 +76,45 @@ class DashboardScreen extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.end,
                                 children: [
                                   SizedBox(height: 20.h),
-
                                   RowText(
                                     Text: student.name,
-                                    Text1: ': الاسم ',
+                                    Text1: "Enter your Full Name".tr(),
                                   ),
-                                  Divider(
-                                    color: Colors.white54,
-                                    thickness: 1,
-                                  ), // خط فاصل
-
+                                  Divider(color: Colors.white54, thickness: 1),
                                   SizedBox(height: 20.h),
-
                                   RowText(
                                     Text: student.WhichGrade,
-                                    Text1: ': الصف ',
+                                    Text1: "Enter the course".tr(),
                                   ),
-
                                   SizedBox(height: 20.h),
-                                  Divider(
-                                    color: Colors.white54,
-                                    thickness: 1,
-                                  ), // خط فاصل
-
+                                  Divider(color: Colors.white54, thickness: 1),
                                   RowText(
                                     Text: student.PublicOrAlAzhar,
-                                    Text1: ': نوع التعليم ',
+                                    Text1: "Education Type".tr(),
                                   ),
                                   SizedBox(height: 20.h),
-                                  Divider(
-                                    color: Colors.white54,
-                                    thickness: 1,
-                                  ), // خط فاصل
-
+                                  Divider(color: Colors.white54, thickness: 1),
                                   RowText(
                                     Text: student.phone,
-                                    Text1: ': رقم الهاتف ',
+                                    Text1:  "Enter your phone".tr(),
                                   ),
                                   SizedBox(height: 20.h),
-                                  Divider(
-                                    color: Colors.white54,
-                                    thickness: 1,
-                                  ), // خط فاصل
-
+                                  Divider(color: Colors.white54, thickness: 1),
                                   RowText(
                                     Text: student.guardianPhone,
-                                    Text1: ': رقم ولي الامر ',
+                                    Text1: "Enter your guardian phone".tr(),
                                   ),
                                   SizedBox(height: 20.h),
-                                  Divider(
-                                    color: Colors.white54,
-                                    thickness: 1,
-                                  ), // خط فاصل
-
+                                  Divider(color: Colors.white54, thickness: 1),
                                   RowText(
                                     Text: student.city,
-                                    Text1: ': المدينه ',
+                                    Text1: "City".tr(),
                                   ),
-
                                   SizedBox(height: 20.h),
                                 ],
                               );
                             }
 
-                            // 3️⃣ Error
                             if (state is DashboardError) {
                               return Center(
                                 child: Text(
@@ -164,13 +135,13 @@ class DashboardScreen extends StatelessWidget {
                       borderRadius: BorderRadius.circular(24.r),
                       gradientColors: [
                         Colors.purple.shade800,
-                        Color(0xFF2E3A59), // أزرق داكن هادي
-                        Color(0xFF4E5D78), // أزرق رمادي هادي
+                        Color(0xFF2E3A59),
+                        Color(0xFF4E5D78),
                       ],
                       child: Column(
                         children: [
                           Text(
-                            "Hello Dashboard",
+                            "Hello Dashboard".tr(),
                             style: TextStyle(
                               fontSize: 20.sp,
                               color: Colors.white,
@@ -178,26 +149,25 @@ class DashboardScreen extends StatelessWidget {
                           ),
                           SizedBox(height: 20.h),
                           Text(
-                            "Custom container content goes here",
+                            "Custom container content goes here".tr(),
                             style: TextStyle(color: Colors.white70),
                           ),
                         ],
                       ),
                     ),
                     SizedBox(height: 20.h),
-
                     ContainerDashboard(
                       minHeight: 200,
                       borderRadius: BorderRadius.circular(24.r),
                       gradientColors: [
-                        Color(0xFF2E3A59), // أزرق داكن هادي
-                        Color(0xFF4E5D78), // أزرق رمادي هادي
+                        Color(0xFF2E3A59),
+                        Color(0xFF4E5D78),
                         Colors.pink.shade400
                       ],
                       child: Column(
                         children: [
                           Text(
-                            "عدد النقاط",
+                            "عدد النقاط".tr(),
                             style: TextStyle(
                               fontSize: 30.sp,
                               color: Colors.white,
@@ -207,12 +177,10 @@ class DashboardScreen extends StatelessWidget {
                           Text(
                             "0",
                             style: AppTextStyle.Bold30Whit,
-
                           ),
                         ],
                       ),
                     ),
-
                     SizedBox(height: 20.h),
                     CousstomBotton(
                       titell: "Back to Home".tr(),

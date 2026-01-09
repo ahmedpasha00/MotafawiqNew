@@ -9,6 +9,8 @@ class CousttomTextFeld extends StatefulWidget {
   final bool isPassword;
   final TextInputType? keyboardType;
   final String? Function(String?)? validator; // 👈 مهم
+  final Function(String)? onChanged; // ✅ أضف هذا
+
 
   const CousttomTextFeld({
     super.key,
@@ -19,6 +21,8 @@ class CousttomTextFeld extends StatefulWidget {
     this.isPassword = false,
     this.keyboardType,
     this.validator,
+    this.onChanged, // ✅ أضف هذا
+
   });
 
   @override
@@ -44,6 +48,8 @@ class _CousttomTextFeldState extends State<CousttomTextFeld> {
         onTap: () {
           FocusScope.of(context).unfocus();
         },
+        onChanged: widget.onChanged, // ✅ هنا ربط الـ onChanged
+
         decoration: InputDecoration(
           contentPadding: EdgeInsets.symmetric(
             vertical: 5.h, // تتحكم في الارتفاع
@@ -62,7 +68,7 @@ class _CousttomTextFeldState extends State<CousttomTextFeld> {
             fontSize: 17.sp,
             color: Colors.black,
           ),
-          floatingLabelBehavior: FloatingLabelBehavior.never, // السلوك الطبيعي
+          floatingLabelBehavior: FloatingLabelBehavior.auto, // السلوك الطبيعي
           floatingLabelStyle: TextStyle(
             color: Colors.black, // لون النص لما يطفو فوق
             fontSize: 20.sp, // حجم النص لما يطفو فوق
@@ -87,8 +93,11 @@ class _CousttomTextFeldState extends State<CousttomTextFeld> {
               : widget.suffixIcon,
       
           border: OutlineInputBorder(borderRadius: BorderRadius.circular(20.r)),
+
         ),
+
       ),
+
     );
   }
 }

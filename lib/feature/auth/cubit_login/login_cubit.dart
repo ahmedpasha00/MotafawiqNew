@@ -17,8 +17,9 @@ class LoginCubit extends Cubit<LoginState> {
     required String phone,
     required String guardianPhone,
     required String city,
-    required String WhichGrade,
     required String PublicOrAlAzhar,
+    required String WhichGrade, // 👈 أضف ده
+
   }) async {
     if (emailAddress.isEmpty || password.isEmpty) {
       emit(LoginError(message: "Email and password cannot be empty"));
@@ -36,7 +37,7 @@ class LoginCubit extends Cubit<LoginState> {
         phone: phone,
         guardianPhone: guardianPhone,
         cuty: city,
-        WhichGrade: WhichGrade,
+        WhichGrade: WhichGrade, // ✅ صح
         PublicOrAlAzhar: PublicOrAlAzhar,
       );
 

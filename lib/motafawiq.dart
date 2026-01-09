@@ -27,7 +27,7 @@ class Motafawiq extends StatelessWidget {
         locale: context.locale,
         supportedLocales: context.supportedLocales,
         localizationsDelegates: context.localizationDelegates,
-
+debugShowCheckedModeBanner: false,
         home: SplashScreen(),
       ),
     );

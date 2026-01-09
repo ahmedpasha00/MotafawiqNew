@@ -11,6 +11,7 @@ import '../../../core/widgets/cousstom_botton.dart';
 import '../../../core/widgets/coustom_language.dart';
 import '../../../core/widgets/cousttom_text_feld.dart';
 import '../../../core/widgets/show_loading_dialog.dart';
+import '../../../core/widgets/student_grades/student_grades_class.dart';
 import '../../landing/presentation/landing_screen.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -33,6 +34,7 @@ class _RegisterScreenState extends State<LoginScreen> {
       TextEditingController();
   final TextEditingController WhichgradeController = TextEditingController();
 
+
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
@@ -50,6 +52,16 @@ class _RegisterScreenState extends State<LoginScreen> {
 
     super.dispose();
   }
+
+  String? selectedGrade;
+
+
+
+  final List<String> grades = [
+    Grades.first,
+    Grades.second,
+    Grades.third,
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -96,10 +108,10 @@ class _RegisterScreenState extends State<LoginScreen> {
                           keyboardType: TextInputType.emailAddress,
                           validator: (value) {
                             if (value == null || value.isEmpty) {
-                              return "Email is required";
+                              return "Email is required".tr();
                             }
                             if (!value.contains('@')) {
-                              return "Enter a valid '@' email";
+                              return "Enter a valid '@' email".tr();
                             }
                             return null;
                           },
@@ -184,17 +196,33 @@ class _RegisterScreenState extends State<LoginScreen> {
                         ),
                         SizedBox(height: 25.h),
 
-                        CousttomTextFeld(
-                          controller: WhichgradeController,
-                          hintText: "Enter your Which grade".tr(),
-                          isPassword: false,
+                        DropdownButtonFormField<String>(
+                          value: selectedGrade,
+                          decoration: InputDecoration(
+                            labelText: 'اختر الصف الدراسي',
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                          ),
+                          items: grades.map((grade) {
+                            return DropdownMenuItem<String>(
+                              value: grade,
+                              child: Text(grade),
+                            );
+                          }).toList(),
+                          onChanged: (value) {
+                            setState(() {
+                              selectedGrade = value; // 👈 الصف المختار من الـ Grades
+                            });
+                          },
                           validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return "Which grade is required";
+                            if (value == null) {
+                              return 'من فضلك اختر الصف الدراسي';
                             }
                             return null;
                           },
                         ),
+
                         SizedBox(height: 25.h),
 
                         CousttomTextFeld(
@@ -256,6 +284,9 @@ class _RegisterScreenState extends State<LoginScreen> {
 
                             onTap: () {
                               if (_formKey.currentState!.validate()) {
+
+                                print("Selected Grade: $selectedGrade");
+
                                 final email = emailController.text.trim();
                                 final password = passwordController.text.trim();
                                 final confirmPassword =
@@ -290,7 +321,7 @@ class _RegisterScreenState extends State<LoginScreen> {
                                   guardianPhone: guardianPhoneController.text
                                       .trim(),
                                   city: cutyController.text.trim(),
-                                  WhichGrade: WhichgradeController.text.trim(),
+                                  WhichGrade: selectedGrade!, // من Dropdown مباشرة
                                   PublicOrAlAzhar: PublicOrAlAzharController
                                       .text
                                       .trim(),

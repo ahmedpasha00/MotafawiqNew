@@ -37,9 +37,10 @@ class LoginRepo {
         'city': cuty,
         //دي هاشيلها لما التطبيق يشتغل
         'Confirmpassword': Confirmpassword,
-        'WhichGrade': WhichGrade,
+        'WhichGrade': WhichGrade, // ✅ موحّد
         'PublicOrAlAzhar': PublicOrAlAzhar,
         'role': 'user', // كل مستخدم جديد عادي هيكون 'user'
+        
         'createdAt': FieldValue.serverTimestamp(),
       });
       return credential;

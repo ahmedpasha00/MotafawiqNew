@@ -22,10 +22,11 @@ class _RowTextState extends State<RowText> {
           child: Text( widget.Text ,style: AppTextStyle.Bold20Whit,
           overflow: TextOverflow.ellipsis,
             maxLines: 2,
+
           ),
         ),
         Expanded(
-          flex: 0,
+          flex: 1,
 
           child: Text( widget.Text1 ,style: AppTextStyle.Bold20Whit,
             overflow: TextOverflow.ellipsis,

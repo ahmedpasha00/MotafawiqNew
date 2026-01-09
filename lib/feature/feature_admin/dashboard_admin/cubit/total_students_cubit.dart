@@ -7,18 +7,18 @@ part 'total_students_state.dart';
 
 class TotalStudentsCubit extends Cubit<TotalStudentsState> {
   final TotalStudentsRepo repository;
+  late final Stream<int> _stream;
 
-  TotalStudentsCubit({required this.repository}) : super(TotalStudentsInitial());
-
-
-
-  Future<void> fetchTotalStudents() async {
-    emit(TotalStudentsLoading());
-    try {
-      final total = await repository.getTotalStudents();
-      emit(TotalStudentsSuccess(total));
-    } catch (e) {
-      emit(TotalStudentsError(e.toString()));
-    }
+  TotalStudentsCubit({required this.repository}) : super(TotalStudentsInitial()) {
+    // هنا بنعمل الاشتراك في Stream
+    _stream = repository.getTotalStudentsStream();
+    _stream.listen(
+          (total) {
+        emit(TotalStudentsSuccess(total));
+      },
+      onError: (e) {
+        emit(TotalStudentsError(e.toString()));
+      },
+    );
   }
 }

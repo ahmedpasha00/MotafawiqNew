@@ -5,16 +5,9 @@ class TotalStudentsRepo {
 
   TotalStudentsRepo({required this.firestore});
 
-
-  Future<int> getTotalStudents()async{
-    try{
-
-      final snapshot = await firestore.collection('users').get();
-      return snapshot.docs.length;
-    }catch(e){
-      print("Error fetching students: $e");
-      return 0;
-
-    }
+  Stream<int> getTotalStudentsStream() {
+    return firestore.collection('users')
+        .snapshots()
+        .map((snapshot) => snapshot.docs.length);
   }
-}
+  }

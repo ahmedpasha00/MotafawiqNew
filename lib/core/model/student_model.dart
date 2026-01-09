@@ -6,6 +6,8 @@ class StudentModel {
   final String guardianPhone;
   final String city;
   final String WhichGrade;
+  final DateTime? createdAt; // ✅ أضف هذا الحقل
+
 
   StudentModel({
     required this.name,
@@ -13,7 +15,7 @@ class StudentModel {
     required this.PublicOrAlAzhar,
     required this.phone,
     required this.guardianPhone,
-    required this.city, required this.WhichGrade,
+    required this.city, required this.WhichGrade, this.createdAt,
   });
 
   factory StudentModel.fromMap(Map<String, dynamic> map) {
@@ -25,6 +27,8 @@ class StudentModel {
       guardianPhone: map['guardianPhone'] ?? '',
       city: map['city'] ?? '',
       WhichGrade: map['WhichGrade']??'',
+      createdAt: map['createdAt']?.toDate(), // ✅ تحويل Timestamp إلى DateTime
+
     );
   }
 }

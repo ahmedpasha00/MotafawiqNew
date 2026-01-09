@@ -1,6 +1,11 @@
 import 'package:al_motafawiq/core/widgets/container_dashboard.dart';
 import 'package:al_motafawiq/feature/feature_admin/dashboard_admin/cubit/total_students_cubit.dart';
 import 'package:al_motafawiq/feature/feature_admin/dashboard_admin/data/repo/total_students_repo.dart';
+import 'package:al_motafawiq/feature/feature_admin/dashboard_admin/presentation/widgets/containar_dash_admin.dart';
+import 'package:al_motafawiq/feature/feature_admin/first_year_of_secondary/presentation/first_year_of_secondary_screen.dart';
+import 'package:al_motafawiq/feature/feature_admin/second_year_of_secondary/presentation/second_year_of_secondary_screen.dart';
+import 'package:al_motafawiq/feature/feature_admin/setting_admin/presentation/setting_admin_screen.dart';
+import 'package:al_motafawiq/feature/feature_admin/third_year_of_secondary/presentation/third_year_of_secondary_screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -17,7 +22,7 @@ class DashboardAdminScreen extends StatelessWidget {
     return BlocProvider(
       create: (context) => TotalStudentsCubit(
         repository: TotalStudentsRepo(firestore: FirebaseFirestore.instance),
-      )..fetchTotalStudents(),
+      ),
       child: Scaffold(
         body: Stack(
           children: [
@@ -34,8 +39,8 @@ class DashboardAdminScreen extends StatelessWidget {
                         borderRadius: BorderRadius.circular(24.r),
                         gradientColors: [
                           Color(0xFF2E3A59), // أزرق داكن هادي
-                          Color(0xFF4E5D78), // أزرق رمادي هادي
-                          Colors.pink.shade400,
+                          Colors.blue.shade400,
+                          Colors.blue.shade900,
                         ],
                         child: Column(
                           children: [
@@ -74,6 +79,31 @@ class DashboardAdminScreen extends StatelessWidget {
                           ],
                         ),
                       ),
+                     SizedBox(height: 30.h,),
+                     ContainarDashAdmin(text: 'الصف الاول الثانوي ',
+                     onTap: (){
+                       Navigator.push(context, MaterialPageRoute(builder: (context)=>FirstYearOfSecondaryScreen()));
+                     },
+                     ),
+                      SizedBox(height: 30.h,),
+                      ContainarDashAdmin(text: 'الصف الثاني الثانوي ',
+                        onTap: (){
+                          Navigator.push(context, MaterialPageRoute(builder: (context)=>SecondYearOfSecondaryScreen()));
+                        },
+                      ),SizedBox(height: 30.h,),
+                      ContainarDashAdmin(text: 'الصف الثالث الثانوي ',
+                        onTap: (){
+                          Navigator.push(context, MaterialPageRoute(builder: (context)=>ThirdYearOfSecondaryScreen()));
+                        },
+                      ),
+                      SizedBox(height: 30.h,),
+                      ContainarDashAdmin(text: '⚙️ الاعدادات',
+                        onTap: (){
+                          Navigator.push(context, MaterialPageRoute(builder: (context)=>SettingAdminScreen()));
+                        },
+                      ),
+
+
                     ],
                   ),
                 ),

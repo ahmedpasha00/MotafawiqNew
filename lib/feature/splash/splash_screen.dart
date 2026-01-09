@@ -11,6 +11,7 @@ import '../../core/widgets/animate_gradient.dart';
 import '../auth/preasntation/register_screen.dart';
 import '../landing/presentation/landing_screen.dart';
 import '../welcome/presentation/welcome_screen.dart';
+import 'package:easy_localization/easy_localization.dart'; // ✅ إضافه
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -29,7 +30,6 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  @override
   @override
   void initState() {
     super.initState();
@@ -78,7 +78,6 @@ class _SplashScreenState extends State<SplashScreen> {
     });
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -97,7 +96,10 @@ class _SplashScreenState extends State<SplashScreen> {
                   children: [
                     Lottie.asset("assets/images/Online Learning.json"),
                     SizedBox(height: 15.h),
-                    Text("AlMotafawiq", style: AppTextStyle.Bold30Whit),
+                    Text(
+                      "AlMotafawiq".tr(), // ✅ جاهز للترجمة
+                      style: AppTextStyle.Bold30Whit,
+                    ),
                   ],
                 ),
               ),

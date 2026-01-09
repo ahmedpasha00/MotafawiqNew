@@ -13,12 +13,13 @@ import 'motafawiq.dart';
 void main() async {
 
   WidgetsFlutterBinding.ensureInitialized();
-  // await dotenv.load(fileName: ".env"); // لازم قبل runApp
   await EasyLocalization.ensureInitialized();
-
+  await dotenv.load(fileName: ".env");
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  await Hive.initFlutter(); // تشغيل هايف على الموبايل
+  await Hive.openBox('chatBox'); // فتح صندوق هنسميه chatBox لتخزين الرسايل
   await ScreenUtil.ensureScreenSize();
   runApp(
   EasyLocalization(

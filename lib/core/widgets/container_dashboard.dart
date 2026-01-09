@@ -3,17 +3,18 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ContainerDashboard extends StatelessWidget {
   final double minHeight;
-  final double maxHeight;
+  // final double maxHeight;
   final BorderRadius? borderRadius;
   final List<Color>? gradientColors;
   final Widget? child;
   final EdgeInsetsGeometry? padding;
 
 
+
   const ContainerDashboard({
     Key? key,
     this.minHeight = 400,          // القيمة الافتراضية
-    this.maxHeight = double.infinity,
+    // this.maxHeight = double.infinity,
     this.borderRadius,
     this.gradientColors,
     this.child,
@@ -28,7 +29,7 @@ class ContainerDashboard extends StatelessWidget {
       constraints: BoxConstraints(
 
         minHeight: minHeight.h,
-        maxHeight: maxHeight.h,
+        // maxHeight: maxHeight.h,
       ),
       padding: padding ?? EdgeInsets.all(16.r),
       decoration: BoxDecoration(

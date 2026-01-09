@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:easy_localization/easy_localization.dart'; // ✅ إضافه
 
 import '../../../feature/welcome/presentation/welcome_screen.dart'; // صفحة Welcome
 
@@ -22,7 +23,7 @@ class LogoutScreen extends StatelessWidget {
           ),
           icon: Icon(Icons.logout, color: Colors.white),
           label: Text(
-            "تسجيل الخروج",
+            "logout".tr(), // ✅ جاهز للترجمة
             style: TextStyle(color: Colors.white, fontSize: 18.sp),
           ),
           onPressed: () {
@@ -30,14 +31,14 @@ class LogoutScreen extends StatelessWidget {
             showDialog(
               context: context,
               builder: (ctx) => AlertDialog(
-                title: Text("تأكيد"),
-                content: Text("هل أنت متأكد من تسجيل الخروج؟"),
+                title: Text("Confirm".tr()), // ✅ جاهز للترجمة
+                content: Text("Are you sure you want to logout?".tr()), // ✅ جاهز للترجمة
                 actions: [
                   TextButton(
                     onPressed: () {
                       Navigator.of(ctx).pop(); // إغلاق الـ dialog
                     },
-                    child: Text("لا"),
+                    child: Text("No".tr()), // ✅ جاهز للترجمة
                   ),
                   TextButton(
                     onPressed: () async {
@@ -50,7 +51,7 @@ class LogoutScreen extends StatelessWidget {
                             (route) => false,
                       );
                     },
-                    child: Text("نعم"),
+                    child: Text("Yes".tr()), // ✅ جاهز للترجمة
                   ),
                 ],
               ),
